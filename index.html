@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vabsol Digital Solution | Premium Digital Growth</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <meta name="description"
+        content="Vabsol Digital Solution - Scaling businesses with premium design, digital strategy, and intelligent automation.">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Syncopate:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Library for Scroll Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #0d9488;
+            --accent: #f59e0b;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+            /* Dark Theme (Default) */
+            --bg-body: #020617;
+            --bg-section: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --nav-bg: rgba(2, 6, 23, 0.9);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        [data-theme="light"] {
+            --bg-body: #ffffff;
+            --bg-section: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --glass-border: rgba(15, 23, 42, 0.08);
+            --nav-bg: rgba(255, 255, 255, 0.9);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* --- Custom Scrollbar --- */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary), var(--secondary));
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        /* --- Background Animation --- */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(37, 99, 235, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(13, 148, 136, 0.05) 0%, transparent 40%);
+            animation: bgPulse 20s infinite alternate linear;
+        }
+
+        @keyframes bgPulse {
+            0% {
+                transform: scale(1) rotate(0deg);
+            }
+
+            100% {
+                transform: scale(1.2) rotate(5deg);
+            }
+        }
+
+        /* --- Loader --- */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-darker);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f1f5f9;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* --- Typography --- */
+        h1,
+        h2,
+        h3 {
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- Navbar --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            background: var(--nav-bg);
+            backdrop-filter: blur(15px);
+            padding: 0.7rem 3%;
+            width: 94%;
+            left: 3%;
+            top: 15px;
+            border-radius: 100px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-section);
+            border-color: var(--primary);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        .logo img {
+            height: 60px;
+            width: 60px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 15px var(--primary-glow));
+            transition: var(--transition);
+        }
+
+        .logo:hover img {
+            transform: scale(1.05) rotate(-5deg);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .brand-name {
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            text-transform: capitalize;
+            letter-spacing: -0.5px;
+            color: var(--primary);
+        }
+
+        .brand-tagline {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+            color: var(--primary);
+        }
+
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.3);
+            filter: brightness(1.1);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--glass-border);
+            color: var(--text-main);
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            color: white;
+            box-shadow: 0 10px 20px var(--primary-glow);
+        }
+
+        /* --- Hero Section --- */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+            background: url('hero_bg.png') no-repeat center center/cover;
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--bg-body);
+            opacity: 0.8;
+            z-index: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        [data-theme="dark"] #hero::before {
+            opacity: 0.9;
+        }
+
+        .hero-content {
+            max-width: 850px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            line-height: 1.05;
+            margin-bottom: 2rem;
+            font-weight: 800;
+        }
+
+        .hero-content p {
+            font-size: 1.35rem;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        /* --- Sections General --- */
+        section {
+            padding: 80px 5%;
+            /* Tightened padding */
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            max-width: 750px;
+            margin: 0 auto;
+            font-size: 1.15rem;
+            line-height: 1.7;
+        }
+
+        /* --- Glass Cards --- */
+        .glass-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- About Section --- */
+        #about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 40px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .about-image::after {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 150px;
+            height: 150px;
+            background: var(--secondary);
+            z-index: -1;
+            border-radius: 30px;
+            filter: blur(50px);
+            opacity: 0.4;
+        }
+
+        /* --- Services Grid --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card i {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .service-card:hover i {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* --- Why Choose Us --- */
+        #why-us {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.05), rgba(236, 72, 153, 0.05));
+            border-radius: 60px;
+            margin: 0 5%;
+            border: 1px solid var(--glass-border);
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--glass);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .feature-item i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .feature-item h4 {
+            font-size: 1.1rem;
+        }
+
+        /* --- Stats Section --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.02);
+            border: 1px solid var(--glass-border);
+        }
+
+        .stat-card h2 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Syncopate', sans-serif;
+            color: var(--primary);
+        }
+
+        .stat-card p {
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+        }
+
+        /* --- Portfolio --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .portfolio-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 32px;
+            height: 450px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .portfolio-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(2, 6, 23, 0.95), rgba(2, 6, 23, 0.2));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .portfolio-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-card:hover .portfolio-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .portfolio-tag {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* --- Our Process --- */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+        }
+
+        .process-card {
+            text-align: center;
+            position: relative;
+        }
+
+        .process-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 5px 15px var(--primary-glow);
+        }
+
+        .process-card h3 {
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .process-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* --- Contact --- */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 6rem;
+        }
+
+        .contact-info h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-details {
+            margin-top: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            width: 24px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            background: var(--bg-neutral);
+            border: 1px solid var(--glass-border);
+            padding: 1.2rem;
+            border-radius: 16px;
+            color: var(--text-main);
+            width: 100%;
+            outline: none;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus {
+            border-color: var(--primary);
+            background: var(--bg-card);
+            box-shadow: 0 0 20px var(--primary-glow);
+            transform: scale(1.01);
+        }
+
+        .contact-form .btn {
+            margin-top: 1rem;
+            justify-content: center;
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 80px 5% 40px;
+            border-top: 1px solid var(--glass-border);
+            background: var(--bg-section);
+            color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 5rem;
+            margin-bottom: 5rem;
+        }
+
+        .footer-logo {
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 2rem;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--bg-card);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow);
+        }
+
+        .social-icon:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 20px var(--primary-glow);
+        }
+
+        .footer-links h4 {
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .footer-links h4 {
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+            font-size: 1.1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* --- Floating Action Button --- */
+        .fab-chat {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+            cursor: pointer;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .fab-chat:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.6);
+        }
+
+        @media (max-width: 1200px) {
+
+            .contact-container,
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 992px) {
+
+            #about,
+            .contact-container,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 100%;
+                background: var(--bg-body);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+                z-index: 1001;
+            }
+
+            .logo img {
+                height: 45px;
+                width: 45px;
+            }
+
+            .brand-name {
+                font-size: 1.2rem;
+            }
+
+            .brand-tagline {
+                font-size: 0.6rem;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .menu-btn {
+                display: block;
+                z-index: 1002;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="animated-bg"></div>
+
+    <!-- Page Loader -->
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="logo">
+            <img src="logo.png" alt="vabsol Logo">
+            <div class="logo-text">
+                <span class="brand-name">Vabsol</span>
+                <span class="brand-tagline">Digital Solution</span>
+            </div>
+        </a>
+        <div class="nav-actions">
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="theme-toggle" title="Toggle Theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="menu-btn" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-content" data-aos="fade-up">
+            <h1 class="gradient-text">AI-Powered Digital Growth Partner</h1>
+            <p>We leverage cutting-edge AI automation and digital marketing strategies to scale your business to new
+                heights. Experience the future of growth today.</p>
+            <div class="hero-btns">
+                <a href="#services" class="btn btn-primary">Get Started <i class="fas fa-arrow-right"></i></a>
+                <a href="#contact" class="btn btn-outline">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="about-image" data-aos="fade-right">
+            <img src="portfolio_ai.png" alt="AI Automation">
+        </div>
+        <div class="about-content" data-aos="fade-left">
+            <h4 class="gradient-text">OUR VISIONARY APPROACH</h4>
+            <h2>Precision Engineering Meets High-Level Strategy</h2>
+            <p>At Vabsol Digital Solution, we don't just build tools; we architect future-proof digital ecosystems. Our capability lies in the intersection of deep technical expertise and visionary thinking. We anticipate market shifts before they happen, ensuring your business is always a step ahead.</p>
+            <p style="margin-top: 1.5rem;">We believe in the potential of intelligent automation to unlock human creativity. By handling the complex, data-heavy workflows, we empower your team to focus on high-impact decisions. Our commitment is to deliver uncompromising quality and elite performance in every project we touch.</p>
+            <div style="margin-top: 2.5rem;">
+                <a href="#contact" class="btn btn-primary">Partner With Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Philosophy Section -->
+    <section id="philosophy" style="background: var(--bg-section);">
+        <div class="section-title" data-aos="fade-up">
+            <h4 class="gradient-text">WHY VABSOL</h4>
+            <h2>Unlocking Exponential Potential</h2>
+            <p>Our philosophy is built on four pillars of excellence that define our service quality and support.</p>
+        </div>
+        <div class="services-grid">
+            <div class="glass-card" data-aos="fade-up">
+                <i class="fas fa-lightbulb" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1.5rem;"></i>
+                <h3>Visionary Thinking</h3>
+                <p>We push the boundaries of what's possible, combining high-level conceptualization with practical AI applications to solve tomorrow's challenges today.</p>
+            </div>
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-award" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1.5rem;"></i>
+                <h3>Elite Quality</h3>
+                <p>Excellence is our baseline. Every digital product we deliver undergoes rigorous quality assurance to ensure it meets the highest global standards of performance.</p>
+            </div>
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-rocket" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1.5rem;"></i>
+                <h3>Infinite Potential</h3>
+                <p>Our solutions are designed to scale seamlessly. Whether you are a startup or an enterprise, our architecture grows with you, unlocking new levels of productivity.</p>
+            </div>
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="300">
+                <i class="fas fa-headset" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1.5rem;"></i>
+                <h3>Dedicated Support</h3>
+                <p>We are more than a vendor; we are your long-term partners. Our proactive support team ensures your systems are always optimized and running at peak efficiency.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="section-title" data-aos="fade-up">
+            <h4 class="gradient-text">OUR EXPERTISE</h4>
+            <h2>Premium AI Services</h2>
+            <p>Comprehensive digital solutions tailored for the modern era, focusing on automation and scalability.</p>
+        </div>
+        <div class="services-grid">
+            <div class="glass-card service-card" data-aos="zoom-in" data-aos-delay="100">
+                <i class="fas fa-microchip"></i>
+                <h3>AI Marketing Tools</h3>
+                <p>Custom AI-driven tools designed to automate your marketing efforts and maximize ROI with precision.
+                </p>
+            </div>
+            <div class="glass-card service-card" data-aos="zoom-in" data-aos-delay="200">
+                <i class="fab fa-instagram"></i>
+                <h3>Instagram Marketing</h3>
+                <p>Strategic growth and engagement patterns powered by AI to dominate the visual landscape and trends.
+                </p>
+            </div>
+            <div class="glass-card service-card" data-aos="zoom-in" data-aos-delay="300">
+                <i class="fab fa-facebook-f"></i>
+                <h3>Facebook Marketing</h3>
+                <p>High-conversion ad campaigns and community management using deep data-driven AI insights.</p>
+            </div>
+            <div class="glass-card service-card" data-aos="zoom-in" data-aos-delay="400">
+                <i class="fas fa-code"></i>
+                <h3>Web Development</h3>
+                <p>Fast, responsive, and stunning websites built with the latest technologies for ultimate performance.
+                </p>
+            </div>
+            <div class="glass-card service-card" data-aos="zoom-in" data-aos-delay="500">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Mobile App Development</h3>
+                <p>Premium cross-platform mobile experiences that feel native and perform flawlessly on all devices.</p>
+            </div>
+            <div class="glass-card service-card" data-aos="zoom-in" data-aos-delay="600">
+                <i class="fas fa-bolt"></i>
+                <h3>AI Automation Workflow</h3>
+                <p>Optimizing your business processes by integrating seamless AI automation at every critical step.</p>
+            </div>
+            <div class="glass-card service-card" data-aos="zoom-in" data-aos-delay="700">
+                <i class="fas fa-rocket"></i>
+                <h3>End-to-End AI Marketing</h3>
+                <p>Full-scale marketing strategy from research to execution, all powered by next-gen AI systems.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section id="why-us" data-aos="fade-up">
+        <div class="section-title">
+            <h4 class="gradient-text">WHY VABSOL</h4>
+            <h2>The AI Advantage</h2>
+        </div>
+        <div class="features-list">
+            <div class="feature-item">
+                <i class="fas fa-robot"></i>
+                <h4>AI-Driven Automation</h4>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-wallet"></i>
+                <h4>Cost-Effective</h4>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-shipping-fast"></i>
+                <h4>Fast Delivery</h4>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-chart-line"></i>
+                <h4>Scalable Solutions</h4>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-cogs"></i>
+                <h4>Custom Development</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats">
+        <div class="stats-grid">
+            <div class="stat-card" data-aos="fade-up">
+                <h2 class="gradient-text">150+</h2>
+                <p>AI Tools Developed</p>
+            </div>
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                <h2 class="gradient-text">500k+</h2>
+                <p>Leads Generated</p>
+            </div>
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                <h2 class="gradient-text">98%</h2>
+                <p>Client Satisfaction</p>
+            </div>
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+                <h2 class="gradient-text">24/7</h2>
+                <p>AI Support</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="section-title" data-aos="fade-up">
+            <h4 class="gradient-text">OUR WORK</h4>
+            <h2>Featured Projects</h2>
+        </div>
+        <div class="portfolio-grid">
+            <div class="portfolio-card" data-aos="fade-up">
+                <img src="portfolio_ai.png" alt="AI Tool">
+                <div class="portfolio-overlay">
+                    <span class="portfolio-tag">AI TOOLS</span>
+                    <h3>Nexus AI Dashboard</h3>
+                    <p>Comprehensive AI marketing analytics platform for enterprise scale.</p>
+                </div>
+            </div>
+            <div class="portfolio-card" data-aos="fade-up" data-aos-delay="100">
+                <img src="portfolio_web.png" alt="Website">
+                <div class="portfolio-overlay">
+                    <span class="portfolio-tag">WEBSITES</span>
+                    <h3>Aura Luxury E-commerce</h3>
+                    <p>High-end shopping experience with sleek glassmorphism UI.</p>
+                </div>
+            </div>
+            <div class="portfolio-card" data-aos="fade-up" data-aos-delay="200">
+                <img src="portfolio_app.png" alt="Mobile App">
+                <div class="portfolio-overlay">
+                    <span class="portfolio-tag">MOBILE APPS</span>
+                    <h3>Vitality Wellness App</h3>
+                    <p>AI-driven health and wellness tracking for a modern lifestyle.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Process Section -->
+    <section id="process">
+        <div class="section-title" data-aos="fade-up">
+            <h4 class="gradient-text">HOW WE WORK</h4>
+            <h2>Our Working Process</h2>
+            <p>We follow a structured and transparent approach to ensure your project's success from start to finish.
+            </p>
+        </div>
+        <div class="process-grid">
+            <div class="glass-card process-card" data-aos="fade-up">
+                <div class="process-number">1</div>
+                <h3>Discovery</h3>
+                <p>We start by understanding your business needs, target audience, and long-term objectives.</p>
+            </div>
+            <div class="glass-card process-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="process-number">2</div>
+                <h3>Strategy</h3>
+                <p>Developing a comprehensive digital roadmap tailored specifically to your growth goals.</p>
+            </div>
+            <div class="glass-card process-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="process-number">3</div>
+                <h3>Execution</h3>
+                <p>Our team builds and deploys high-quality solutions using the latest technologies.</p>
+            </div>
+            <div class="glass-card process-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="process-number">4</div>
+                <h3>Optimization</h3>
+                <p>Continuous monitoring and scaling to ensure your digital presence keeps growing.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="section-title" data-aos="fade-up">
+            <h4 class="gradient-text">CONTACT US</h4>
+            <h2>Let's Start Your Growth Journey</h2>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info" data-aos="fade-right">
+                <h3>Get in Touch</h3>
+                <p>Have a project in mind or want to learn more about our AI solutions? We'd love to hear from you and
+                    build something amazing together.</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i class="fas fa-user-tie"></i>
+                        <span>Vartika Krishna</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>+91 7011338726</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>vabsoldigitalsolution@gmail.com</span>
+                    </div>
+                </div>
+            </div>
+            <form class="glass-card contact-form" data-aos="fade-left">
+                <div class="input-group">
+                    <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="input-group">
+                    <input type="email" placeholder="Your Email Address" required 
+                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                           title="Please enter a valid email address (e.g. user@example.com)">
+                </div>
+                <div class="input-group">
+                    <textarea rows="5" placeholder="Tell us about your project or requirements..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message <i class="fas fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-about">
+                <a href="#" class="logo footer-logo">
+                    <img src="logo.png" alt="vabsol Logo">
+                    <div class="logo-text">
+                        <span class="brand-name">Vabsol</span>
+                        <span class="brand-tagline">Digital Solution</span>
+                    </div>
+                </a>
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">Vabsol Digital Solution. We empower businesses
+                    through high-end digital strategies, premium web experiences, and intelligent automation solutions.
+                </p>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#process">Process</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#services">AI Marketing</a></li>
+                    <li><a href="#services">Web Development</a></li>
+                    <li><a href="#services">App Development</a></li>
+                    <li><a href="#services">Automation</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Contact Details</h4>
+                <ul style="color: var(--text-muted);">
+                    <li>Vartika Krishna</li>
+                    <li>7011338726</li>
+                    <li>vabsoldigitalsolution@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year"></span> Vabsol Digital Solution. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <!-- Floating Chat Button -->
+    <div class="fab-chat">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-bars';
+            }
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.querySelector('i').className = 'fas fa-bars';
+            });
+        });
+
+        // Page Loader
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 500);
+        });
+
+        // Smooth Scroll for all links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+        const html = document.documentElement;
+
+        // Initialize theme (Force Dark if no clear preference or to override legacy)
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        html.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        function updateThemeIcon(theme) {
+            themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+        }
+
+        // Form Submission Mock
+        const contactForm = document.querySelector('.contact-form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = contactForm.querySelector('button');
+            const originalContent = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            btn.style.opacity = '0.7';
+            btn.style.pointerEvents = 'none';
+
+            setTimeout(() => {
+                alert('Thank you! Your message has been sent successfully. We will get back to you shortly.');
+                contactForm.reset();
+                btn.innerHTML = originalContent;
+                btn.style.opacity = '1';
+                btn.style.pointerEvents = 'all';
+            }, 1500);
+        });
+
+        // Set Dynamic Year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>
