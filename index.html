@@ -929,8 +929,13 @@
         <div class="about-content" data-aos="fade-left">
             <h4 class="gradient-text">OUR VISIONARY APPROACH</h4>
             <h2>Precision Engineering Meets High-Level Strategy</h2>
-            <p>At Vabsol Digital Solution, we don't just build tools; we architect future-proof digital ecosystems. Our capability lies in the intersection of deep technical expertise and visionary thinking. We anticipate market shifts before they happen, ensuring your business is always a step ahead.</p>
-            <p style="margin-top: 1.5rem;">We believe in the potential of intelligent automation to unlock human creativity. By handling the complex, data-heavy workflows, we empower your team to focus on high-impact decisions. Our commitment is to deliver uncompromising quality and elite performance in every project we touch.</p>
+            <p>At Vabsol Digital Solution, we don't just build tools; we architect future-proof digital ecosystems. Our
+                capability lies in the intersection of deep technical expertise and visionary thinking. We anticipate
+                market shifts before they happen, ensuring your business is always a step ahead.</p>
+            <p style="margin-top: 1.5rem;">We believe in the potential of intelligent automation to unlock human
+                creativity. By handling the complex, data-heavy workflows, we empower your team to focus on high-impact
+                decisions. Our commitment is to deliver uncompromising quality and elite performance in every project we
+                touch.</p>
             <div style="margin-top: 2.5rem;">
                 <a href="#contact" class="btn btn-primary">Partner With Us</a>
             </div>
@@ -946,24 +951,29 @@
         </div>
         <div class="services-grid">
             <div class="glass-card" data-aos="fade-up">
-                <i class="fas fa-lightbulb" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1.5rem;"></i>
+                <i class="fas fa-lightbulb"
+                    style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1.5rem;"></i>
                 <h3>Visionary Thinking</h3>
-                <p>We push the boundaries of what's possible, combining high-level conceptualization with practical AI applications to solve tomorrow's challenges today.</p>
+                <p>We push the boundaries of what's possible, combining high-level conceptualization with practical AI
+                    applications to solve tomorrow's challenges today.</p>
             </div>
             <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
                 <i class="fas fa-award" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1.5rem;"></i>
                 <h3>Elite Quality</h3>
-                <p>Excellence is our baseline. Every digital product we deliver undergoes rigorous quality assurance to ensure it meets the highest global standards of performance.</p>
+                <p>Excellence is our baseline. Every digital product we deliver undergoes rigorous quality assurance to
+                    ensure it meets the highest global standards of performance.</p>
             </div>
             <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
                 <i class="fas fa-rocket" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1.5rem;"></i>
                 <h3>Infinite Potential</h3>
-                <p>Our solutions are designed to scale seamlessly. Whether you are a startup or an enterprise, our architecture grows with you, unlocking new levels of productivity.</p>
+                <p>Our solutions are designed to scale seamlessly. Whether you are a startup or an enterprise, our
+                    architecture grows with you, unlocking new levels of productivity.</p>
             </div>
             <div class="glass-card" data-aos="fade-up" data-aos-delay="300">
                 <i class="fas fa-headset" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1.5rem;"></i>
                 <h3>Dedicated Support</h3>
-                <p>We are more than a vendor; we are your long-term partners. Our proactive support team ensures your systems are always optimized and running at peak efficiency.</p>
+                <p>We are more than a vendor; we are your long-term partners. Our proactive support team ensures your
+                    systems are always optimized and running at peak efficiency.</p>
             </div>
         </div>
     </section>
@@ -1048,7 +1058,7 @@
     </section>
 
     <!-- Stats Section -->
-    <section id="stats">
+    <!-- <section id="stats">
         <div class="stats-grid">
             <div class="stat-card" data-aos="fade-up">
                 <h2 class="gradient-text">150+</h2>
@@ -1067,7 +1077,7 @@
                 <p>AI Support</p>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Portfolio Section -->
     <section id="portfolio">
@@ -1166,9 +1176,9 @@
                     <input type="text" placeholder="Your Name" required>
                 </div>
                 <div class="input-group">
-                    <input type="email" placeholder="Your Email Address" required 
-                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                           title="Please enter a valid email address (e.g. user@example.com)">
+                    <input type="email" placeholder="Your Email Address" required
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        title="Please enter a valid email address (e.g. user@example.com)">
                 </div>
                 <div class="input-group">
                     <textarea rows="5" placeholder="Tell us about your project or requirements..."></textarea>
@@ -1228,7 +1238,8 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; <span id="current-year"></span> Vabsol Digital Solution. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            <p>&copy; <span id="current-year"></span> Vabsol Digital Solution. All rights reserved. | <a
+                    href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
         </div>
     </footer>
 
@@ -1310,7 +1321,7 @@
         themeToggle.addEventListener('click', () => {
             const currentTheme = html.getAttribute('data-theme');
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
+
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             updateThemeIcon(newTheme);
@@ -1326,7 +1337,7 @@
             e.preventDefault();
             const btn = contactForm.querySelector('button');
             const originalContent = btn.innerHTML;
-            
+
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             btn.style.opacity = '0.7';
             btn.style.pointerEvents = 'none';
